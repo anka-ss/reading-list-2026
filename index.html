@@ -481,37 +481,58 @@
             }
         }
 
-        /* ===== EXPORT MODE ===== */
+        /* ===== EXPORT MODE - Direct colors, no CSS variables ===== */
         .export-mode {
-            /* Override CSS variables with brighter colors for export */
-            --accent: #c41e3a !important;
-            --ink-light: #2a2a2a !important;
+            background: #f8f4eb !important;
         }
         
-        .export-mode .book-title {
-            text-decoration-style: dotted;
-            color: #c41e3a !important;
-        }
-        
-        .export-mode .month-name {
-            color: #c41e3a !important;
-        }
-        
-        .export-mode .book-tags {
-            color: #2a2a2a !important;
-        }
-        
-        .export-mode .book-adult {
-            background: #c41e3a !important;
-            color: #fff !important;
+        .export-mode .card-header {
+            background: #1a1a1a !important;
+            color: #f8f4eb !important;
         }
         
         .export-mode .card-subtitle {
-            opacity: 1 !important;
+            color: #f8f4eb !important;
+            opacity: 0.85 !important;
+        }
+        
+        .export-mode .card-title {
+            color: #f8f4eb !important;
+        }
+        
+        .export-mode .card-year {
+            color: #f8f4eb !important;
+        }
+        
+        .export-mode .book-title {
+            color: #b81c2f !important;
+            text-decoration-color: #b81c2f !important;
+        }
+        
+        .export-mode .month-name {
+            color: #b81c2f !important;
+        }
+        
+        .export-mode .book-tags {
+            color: #333333 !important;
+        }
+        
+        .export-mode .book-adult {
+            background: #b81c2f !important;
+            color: #ffffff !important;
         }
         
         .export-mode .month-item {
-            border-bottom-color: #555 !important;
+            border-bottom: 1px dotted #666666 !important;
+        }
+        
+        .export-mode .month-item:last-child {
+            border-bottom: none !important;
+        }
+        
+        .export-mode::after {
+            border-color: #9a7b4f !important;
+            opacity: 0.5 !important;
         }
     </style>
 </head>
@@ -1057,10 +1078,6 @@
             vibrate(30);
             
             const card = document.getElementById('reading-card');
-            card.classList.add('export-mode');
-            
-            // Wait for styles to apply
-            await new Promise(resolve => setTimeout(resolve, 100));
 
             try {
                 const canvas = await html2canvas(card, {
@@ -1068,9 +1085,31 @@
                     scale: 3,
                     useCORS: true,
                     logging: false,
-                    allowTaint: true,
-                    imageTimeout: 0,
-                    removeContainer: false
+                    onclone: function(clonedDoc) {
+                        const clonedCard = clonedDoc.getElementById('reading-card');
+                        
+                        // Apply bright colors to cloned element
+                        clonedCard.querySelectorAll('.book-title').forEach(el => {
+                            el.style.color = '#a31621';
+                        });
+                        clonedCard.querySelectorAll('.month-name').forEach(el => {
+                            el.style.color = '#a31621';
+                        });
+                        clonedCard.querySelectorAll('.book-tags').forEach(el => {
+                            el.style.color = '#2d2d2d';
+                        });
+                        clonedCard.querySelectorAll('.book-adult').forEach(el => {
+                            el.style.backgroundColor = '#a31621';
+                            el.style.color = '#ffffff';
+                        });
+                        clonedCard.querySelectorAll('.month-item').forEach(el => {
+                            el.style.borderBottomColor = '#555555';
+                        });
+                        const subtitle = clonedCard.querySelector('.card-subtitle');
+                        if (subtitle) {
+                            subtitle.style.opacity = '0.9';
+                        }
+                    }
                 });
 
                 const link = document.createElement('a');
@@ -1082,8 +1121,6 @@
             } catch (error) {
                 console.error('Error:', error);
                 alert('Не удалось сохранить');
-            } finally {
-                card.classList.remove('export-mode');
             }
         }
     </script>
