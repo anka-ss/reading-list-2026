@@ -11,10 +11,10 @@
     <style>
         :root {
             --ink: #1a1a1a;
-            --ink-light: #4a4a4a;
-            --paper: #f5f1e8;
+            --ink-light: #3d3d3d;
+            --paper: #f8f4eb;
             --paper-dark: #e8e2d5;
-            --accent: #8b0000;
+            --accent: #a31621;
             --gold: #9a7b4f;
         }
 
@@ -308,7 +308,7 @@
             position: absolute;
             inset: 4px;
             border: 1px solid var(--gold);
-            opacity: 0.25;
+            opacity: 0.4;
             pointer-events: none;
         }
 
@@ -330,7 +330,7 @@
         .card-subtitle {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.5rem;
-            opacity: 0.5;
+            opacity: 0.7;
             letter-spacing: 0.08em;
         }
 
@@ -877,9 +877,7 @@
             { title: "Я встретил призрака", tags: ["амнезия", "мистика оккультизм", "повседневность"], adult: false, link: "https://t.me/c/2743169620/16198" },
             { title: "Собирая звезды", tags: ["взросление", "воссоединение", "здоровые отношения"], adult: false, link: "https://t.me/c/2743169620/16395" },
             { title: "Жуки в янтаре", tags: ["амнезия", "драма", "мафия гангстеры бандиты"], adult: true, link: "https://t.me/c/2743169620/16396" },
-            { title: "Уке сбежал", tags: ["насилие принуждение", "омегаверс або", "хардкор"], adult: true, link: "https://t.me/c/2743169620/16468" },
             { title: "Кольцо Сандрильоны", tags: ["магия", "первая любовь", "повседневность"], adult: false, link: "https://t.me/c/2743169620/16469" },
-            { title: "Одноразовый рот", tags: ["фантастика будущее", "хардкор", "каннибализм"], adult: true, link: "https://t.me/c/2743169620/16507" },
             { title: "Хроники выживания во дворце", tags: ["дворцы интриги", "древний Китай", "фэнтези"], adult: false, link: "https://t.me/c/2743169620/16513" },
             { title: "Я полагаюсь на бедность, чтобы пройти игры на выживание", tags: ["юмор", "бесконечный поток", "фантастика"], adult: false, link: "https://t.me/c/2743169620/16515" },
             { title: "Остерегайся разрыва. Mind The Gap", tags: ["безответная любовь", "взросление", "воссоединение"], adult: true, link: "https://t.me/c/2743169620/16646" },
@@ -896,8 +894,7 @@
             { title: "Гид без ограничений", tags: ["гайдверс", "юмор", "детектив"], adult: true, link: "https://t.me/c/2743169620/17330" },
             { title: "Чистилище", tags: ["мафия гангстеры бандиты", "месть", "травмированный герой"], adult: true, link: "https://t.me/c/2743169620/17331" },
             { title: "Ароматная ночь", tags: ["безответная любовь", "мафия гангстеры бандиты", "насилие принуждение"], adult: true, link: "https://t.me/c/2743169620/17333" },
-            { title: "Booty Wurk", tags: ["насилие принуждение", "первая любовь", "студенты школьники"], adult: false, link: "https://t.me/c/2743169620/17721" },
-            { title: "Мой парень, с которым я встречался 8 лет, привел другого мужчину", tags: ["запретные отношения", "звери", "измена"], adult: true, link: "https://t.me/c/2743169620/17777" },
+            { title: "Booty Wurk", tags: ["насилие принуждение", "первая любовь", "студенты школьники"], adult: true, link: "https://t.me/c/2743169620/17721" },
             { title: "Самцы", tags: ["драма", "контракт", "красивые описания"], adult: true, link: "https://t.me/c/2743169620/17778" },
             { title: "Вселение закончилось, отпустите меня", tags: ["иссекай попаданцы", "манипуляции газлайтинг", "повседневность"], adult: true, link: "https://t.me/c/2743169620/17780" },
             { title: "Стать слепым мужем злодея", tags: ["инвалиды", "иссекай попаданцы", "манипуляции газлайтинг"], adult: false, link: "https://t.me/c/2743169620/17802" },
@@ -1036,10 +1033,11 @@
 
             try {
                 const canvas = await html2canvas(card, {
-                    backgroundColor: '#f5f1e8',
-                    scale: 2,
+                    backgroundColor: '#f8f4eb',
+                    scale: 3,
                     useCORS: true,
-                    logging: false
+                    logging: false,
+                    allowTaint: true
                 });
 
                 const link = document.createElement('a');
