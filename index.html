@@ -482,8 +482,36 @@
         }
 
         /* ===== EXPORT MODE ===== */
+        .export-mode {
+            /* Override CSS variables with brighter colors for export */
+            --accent: #c41e3a !important;
+            --ink-light: #2a2a2a !important;
+        }
+        
         .export-mode .book-title {
             text-decoration-style: dotted;
+            color: #c41e3a !important;
+        }
+        
+        .export-mode .month-name {
+            color: #c41e3a !important;
+        }
+        
+        .export-mode .book-tags {
+            color: #2a2a2a !important;
+        }
+        
+        .export-mode .book-adult {
+            background: #c41e3a !important;
+            color: #fff !important;
+        }
+        
+        .export-mode .card-subtitle {
+            opacity: 1 !important;
+        }
+        
+        .export-mode .month-item {
+            border-bottom-color: #555 !important;
         }
     </style>
 </head>
@@ -1030,6 +1058,9 @@
             
             const card = document.getElementById('reading-card');
             card.classList.add('export-mode');
+            
+            // Wait for styles to apply
+            await new Promise(resolve => setTimeout(resolve, 100));
 
             try {
                 const canvas = await html2canvas(card, {
@@ -1037,12 +1068,14 @@
                     scale: 3,
                     useCORS: true,
                     logging: false,
-                    allowTaint: true
+                    allowTaint: true,
+                    imageTimeout: 0,
+                    removeContainer: false
                 });
 
                 const link = document.createElement('a');
                 link.download = 'reading-list-2026.png';
-                link.href = canvas.toDataURL('image/png');
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
                 
                 playChime();
